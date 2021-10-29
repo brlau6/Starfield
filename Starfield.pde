@@ -7,17 +7,27 @@ class Particle {
     myY = 300;
     mySpeed = (Math.random()*10);
     myAngle = (Math.random()*(2*Math.PI));//(int)(Math.random()*(4*Math.PI));
-    myColor = color(255,0,0);//color((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
+    myColor = color(191, 18, 6);//color((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
   }
   
   void move(){
     myX = myX + (Math.cos(myAngle)*mySpeed);
     myY = myY + (Math.sin(myAngle)*mySpeed);
+    
+    if(myX > mouseX + 100)
+      myX = myX + 5;
+    if(myX < mouseX - 100)
+      myX = myX - 5;
+    if(myY < mouseY + 100)
+      myY = myY + 5;
+    if(myY > mouseY - 100)
+      myY = myY - 5;
+      
   }//end move()
   
   void show(){
     fill(myColor);
-    ellipse((float)myX,(float)myY,(int)(Math.random()*5)+5,(int)(Math.random()*5)+5);
+    ellipse((float)myX,(float)myY,(int)(Math.random()*30)-10,(int)(Math.random()*30)-10);
   }//end show()
 }//end particle class
 
