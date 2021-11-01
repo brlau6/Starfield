@@ -1,13 +1,14 @@
 class Particle {
   double myX, myY, mySpeed, myAngle;
   int myColor;
+  //int[] codeList;
   
   Particle(){
     myX = 300;
     myY = 300;
     mySpeed = (Math.random()*10);
     myAngle = (Math.random()*(2*Math.PI));//(int)(Math.random()*(4*Math.PI));
-    myColor = color(191, 18, 6);//color((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
+    myColor = color(0, 219, 58);//color((int)(Math.random()*256), (int)(Math.random()*256), (int)(Math.random()*256));
   }
   
   void move(){
@@ -27,15 +28,19 @@ class Particle {
   
   void show(){
     fill(myColor);
-    ellipse((float)myX,(float)myY,(int)(Math.random()*30)-10,(int)(Math.random()*30)-10);
+    textSize(20);
+    text((int)(Math.random()*9),(float)myX,(float)myY);
+    fill(255,0,0);
+    //text("+",(float)myX+10,(float)myY);
+    //ellipse((float)myX,(float)myY,(int)(Math.random()*30)-10,(int)(Math.random()*30)-10);
   }//end show()
 }//end particle class
 
 class Oddball extends Particle {
   Oddball(){
-    myX = 250;
-    myY = 250;
-    mySpeed = 2;
+    myX = 300;
+    myY = 300;
+    mySpeed = 4;
     myAngle = (Math.random()*(2*Math.PI));
     myColor = color(255);
   }
@@ -63,7 +68,7 @@ void setup(){
 }
 
 void draw(){
-  fill(0,0,0,20);
+  fill(0,0,0,50);
   rect(0,0,600,600);
   for(int i = 0; i < spray.length; i++){
     spray[i].move();
