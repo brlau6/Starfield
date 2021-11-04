@@ -68,10 +68,11 @@ class Oddball extends Particle {
   }//end show()
 }
 
+//BLUE PILL CODE PARTICLES
 class Explosion extends Particle {
   Explosion(){
-    myX = 300;
-    myY = 300;
+    myX = -1000;
+    myY = -1000;
     mySpeed = (Math.random()*10);
     myAngle = (Math.random()*(2*Math.PI));//(int)(Math.random()*(4*Math.PI));
     myColor = color(0, 219, 58);
@@ -80,60 +81,71 @@ class Explosion extends Particle {
   void move(){
     myX = myX + (Math.cos(myAngle)*mySpeed);
     myY = myY + (Math.sin(myAngle)*mySpeed);
-  }
+    //reset particles to center
+    if(myX > 600 || myX < 0 || myY > 600 || myY < 0){
+      myX = mouseX;
+      myY = mouseY;
+    }
+  }//end move();
+    
+  void show(){
+    fill(myColor);
+    textSize(20);
+    text((int)(Math.random()*9),(float)myX,(float)myY);
+    fill(255);
+    text("You're trapped in the Matrix!",40,40);
+    text("Try to move your mouse, but there's no escaping...",40,70);
+    text("...Unless you take that red pill now.",40,100);
+  }//end show()
 }//end Explosion() class
 
-Particle[] redPill = new Particle[500];
-Particle[] bluePill = new Particle[500];
+Particle[] spray = new Particle[500];
 
 void setup(){
   size(600,600);
   noStroke();
-  if (keyPressed) {
-    if (key == 'b' || key == 'B') {
-       for(int i = 5; i < redPill.length; i++)
-         redPill[i] = new Particle();
-       for(int i = 0; i < 5; i++)
-         redPill[i] = new Oddball();
-    } else if (key == 'r' || key == 'R') {
-       for(int i = 5; i < bluePill.length; i++)
-         bluePill[i] = new Explosion();
-       for(int i = 0; i < 5; i++)
-         bluePill[i] = new Oddball();    
-    } else {
-       //uh?
-    }  
-  }
+   for(int i = 5; i < spray.length; i++)
+     spray[i] = new Particle();
+   for(int i = 0; i < 5; i++)
+     spray[i] = new Oddball();
+  
+  fill(255,255,255);
+  text("Choose between the red and blue pills", 40, 200);
+  text("Press R or B to select whether you want to leave the Matrix or continue living a lie", 40, 300);
 }
 
 void draw(){
   fill(0,0,0);
   rect(0,0,600,600);
-  if(keyPressed){
-    if (key == 'b' || key == 'B') {
-       for(int i = 5; i < bluePill.length; i++)
-         bluePill[i] = new Particle();
-       for(int i = 0; i < 5; i++)
-         bluePill[i] = new Oddball();
-    } else if (key == 'r' || key == 'R') {
-        for(int i = 0; i < redPill.length; i++){
-          redPill[i].move();
-          redPill[i].show();
-        }    
-    } else {
-       //uh?
-    }
-  }
+     
+   for(int i = 0; i < spray.length; i++){
+      spray[i].move();
+      spray[i].show();
+   }    
 }
 
 void mousePressed(){
-  for(int i = 0; i < redPill.length; i++){
-    redPill[i].myX = mouseX;
-    redPill[i].myY = mouseY;
-  }
-  for(int i = 0; i < redPill.length; i++){
-    bluePill[i].myX = mouseX;
-    bluePill[i].myY = mouseY;
+  for(int i = 0; i < spray.length; i++){
+    spray[i].myX = mouseX;
+    spray[i].myY = mouseY;
   }
   //noLoop();
+}
+
+void keyPressed() {  
+  if (key == 'b' || key == 'B') {
+    for(int i = 5; i < spray.length; i++)
+      spray[i] = new Particle();
+    for(int i = 0; i < 5; i++)
+      spray[i] = new Oddball();
+  } else if (key == 'r' || key == 'R') {
+    for(int i = 5; i < spray.length; i++)
+      spray[i] = new Explosion();
+    for(int i = 0; i < 5; i++)
+      spray[i] = new Oddball();
+  }
+  for(int i = 0; i < spray.length; i++){
+    spray[i].move();
+    spray[i].show();
+  }    
 }
