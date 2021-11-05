@@ -30,7 +30,7 @@ class Particle {
     text((int)(Math.random()*9),(float)myX,(float)myY);
     fill(255);
     textSize(15);
-    text("Click and move your mouse to break out of the Matrix",40,660);
+    text("Move your mouse to break out of the Matrix!",40,660);
     //text("+",(float)myX+10,(float)myY);
     //ellipse((float)myX,(float)myY,(int)(Math.random()*30)-10,(int)(Math.random()*30)-10);
   }//end show()
@@ -124,7 +124,7 @@ void draw(){
   text("So, knowing what you know...", 40, 30);
   text("Do you want to leave the Matrix?", 40, 50);
   text("Or will you wake up and remember this as all a dream?",40,70);
-  text("Press 'R' to leave and 'B' to stay.", 40, 90);
+  text("Press 'R' to leave and 'B' to stay. Then click!", 40, 90);
 }
 
 void mousePressed(){
